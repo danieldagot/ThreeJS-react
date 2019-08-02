@@ -12,6 +12,7 @@
     "three.text": "^1.0.13",
     "threex": "^1.0.0"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -30,7 +31,8 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      “https://yourgithubname.github.io/yourreponame"
     ]
   }
 }
