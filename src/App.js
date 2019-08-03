@@ -14,21 +14,37 @@ class App extends Component {
       camera = new
         THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000); camera.position.set(0, - 400, 600); scene = new THREE.Scene(); scene.background = new THREE.Color(0xf0f0f0); let loader = new THREE.FontLoader(); loader.load(
           'https://raw.githubusercontent.com/rollup/three-jsnext/master/examples/fonts/gentilis_bold.typeface.json', function (font) {
-            let xMid, text; let color = new THREE.Color(0x006699); let matDark = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide }); let matLite = new THREE.MeshBasicMaterial(
-              { color: color, transparent: true, opacity: 0.4, side: THREE.DoubleSide }); let message = "shlom hod"; let shapes = font.generateShapes(message, 100); let geometry = new THREE.ShapeBufferGeometry(shapes); geometry.computeBoundingBox();
-            xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x); geometry.translate(xMid, 0, 0); // make shape ( N.B. edge view not visible ) 
-            text = new THREE.Mesh(geometry, matLite); text.position.z = - 150; scene.add(text);
-            // make line shape ( N.B. edge view remains visible )
-            let holeShapes = []; for (let i = 0; i < shapes.length; i++) {
-              let shape = shapes[i]; if (shape.holes && shape.holes.length > 0) {
-                for (let j = 0; j
-                  < shape.holes.length; j++) { let hole = shape.holes[j]; holeShapes.push(hole); }
-              }
-            } shapes.push.apply(shapes, holeShapes); let style = SVGLoader.getStrokeStyle(5, color.getStyle()); let strokeText = new THREE.Group();
-            for (let i = 0; i < shapes.length; i++) {
-              let shape = shapes[i]; let points = shape.getPoints(); let geometry = SVGLoader.pointsToStroke(points, style); geometry.translate(xMid, 0, 0); let strokeMesh = new THREE.Mesh(geometry, matDark
-              ); strokeText.add(strokeMesh);
-            } scene.add(strokeText);
+            // let xMid, text; let color = new THREE.Color(0x006699);
+            //  let matDark = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide });
+            //   let matLite = new THREE.MeshBasicMaterial(
+            //   { color: color, transparent: true, opacity: 0.4, side: THREE.DoubleSide }); 
+            //   let message = "shlom hod"; let shapes = font.generateShapes(message, 100);
+            //    let geometry = new THREE.ShapeBufferGeometry(shapes); geometry.computeBoundingBox();
+            // xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x); 
+            // geometry.translate(xMid, 0, 0); // make shape ( N.B. edge view not visible ) 
+            // text = new THREE.Mesh(geometry, matLite); text.position.z = - 150; scene.add(text);
+            // // make line shape ( N.B. edge view remains visible )
+           
+
+          
+            var textGeometry = new THREE.TextGeometry( "hoooooood", {
+              font: font,
+              size: 60,
+              height: 10,
+              curveSegments: 12,
+              bevelThickness: 1,
+              bevelSize: 1,
+              bevelEnabled: true
+            });
+          
+            var textMaterial = new THREE.MeshPhongMaterial( 
+              { color: 0xdddddd,}
+            );
+          
+            var mesh = new THREE.Mesh( textGeometry, textMaterial );
+          
+            scene.add( mesh );
+        
           }); //end load ffunction
       renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(window.innerWidth, window.innerHeight
       ); document.body.appendChild(renderer.domElement); let controls = new OrbitControls(camera, renderer.domElement); controls.target.set(0, 0, 0); controls.update(); window.addEventListener('resize', onWindowResize, false);
