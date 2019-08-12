@@ -1,11 +1,57 @@
 
 import React, { Component } from "react";
-import * as THREE from "three";
+// import * as THREE from "three";
 import ThreeD from "./3d";
+import jquery from "jquery" 
 
-const OrbitControls = require('three-orbitcontrols')
-let SVGLoader = require('three-svg-loader')
+// const OrbitControls = require('three-orbitcontrols')
+// let SVGLoader = require('three-svg-loader')
+
 class App extends Component {
+constructor()
+{
+  super()
+  this.state = {
+    text: "",
+    bool : true
+     }
+}
+
+
+
+ 
+  updateText = (event) => {
+    // jquery.get(".temp").empty()
+   
+    
+    this.setState({
+    text  : event.target.value
+   },function(){console.log(this.state.text)
+   
+   })
+   
+   
+  }
+
+  render() {
+  jquery("canvas").remove()
+    
+    return (
+     
+      <div className = "temp">
+         <input type="color" name="favcolor" value="#ff0000"/>
+         <input id="name-input"  onChange= {this.updateText}  placeholder= "text" />
+         <div className ="temp2">  <ThreeD text = {this.state.text} bool = {this.state.bool} /> 
+         </div>
+     
+      </div>
+
+    )
+  }
+}
+
+
+export default App;
   // componentDidMount() {
   //   // === THREE.JS CODE START ===
 
@@ -105,18 +151,3 @@ class App extends Component {
   //   // animate();
   //   // // === THREE.JS EXAMPLE CODE END ===
   // }
-  change = () => {}
-  render() {
-    return (
-     
-      <div>
-         <input type text  ></input>
-      <ThreeD text = "sapt" />
-      </div>
-
-    )
-  }
-}
-
-
-export default App;
