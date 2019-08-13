@@ -1,0 +1,8 @@
+19-08-13 15:22:03.1650166 pid:25644 tid:1 sqltools Critical: 0 : An unhandled exception occurred: System.IO.FileLoadException: 
+File name: 'System.Composition.TypedParts, Version=1.0.32.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+   at Microsoft.SqlTools.Extensibility.ExtensionServiceProvider.Create(IEnumerable`1 assemblies)
+   at Microsoft.SqlTools.ServiceLayer.HostLoader.InitializeRequestHandlersAndServices(ServiceHost serviceHost, SqlToolsContext sqlToolsContext)
+   at Microsoft.SqlTools.ServiceLayer.HostLoader.CreateAndStartServiceHost(SqlToolsContext sqlToolsContext)
+   at Microsoft.SqlTools.ServiceLayer.Program.Main(String[] args)
+
+

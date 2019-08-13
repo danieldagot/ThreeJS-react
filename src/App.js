@@ -2,48 +2,76 @@
 import React, { Component } from "react";
 // import * as THREE from "three";
 import ThreeD from "./3d";
-import jquery from "jquery" 
+import jquery from "jquery"
 
 // const OrbitControls = require('three-orbitcontrols')
 // let SVGLoader = require('three-svg-loader')
 
 class App extends Component {
-constructor()
-{
-  super()
-  this.state = {
-    text: "",
-    bool : true
-     }
-}
-
-
-
- 
-  updateText = (event) => {
-    // jquery.get(".temp").empty()
+  constructor() {
    
-    
-    this.setState({
-    text  : event.target.value
-   },function(){console.log(this.state.text)
-   
-   })
-   
-   
+    super()
+    this.temp = ""
+    this.color =  ""
+    this.state = {
+      text: "hello",
+      bool: false,
+      color: "#00ff00"
+      
+    }
   }
 
+
+
+
+  updateText = (event) => {
+    // jquery.get(".temp").empty()
+    // this.setState({
+    //   temp: event.target.value
+    // }, function () {
+    //   console.log(this.state.text)
+
+    // })
+this.temp = event.target.value
+
+  }
+
+  updateColor = (event) => {
+    // jquery.get(".temp").empty()
+    // this.setState({
+    //   color: event.target.value
+    // }, function () {
+    //   console.log(this.state.color)
+
+    // })
+
+this.color= event.target.value
+console.log(this.color);
+  }
+change = () =>
+{
+  this.setState({
+      color: this.color,
+      text:this.temp
+    }, function () {
+      console.log(this.state.color)
+
+    })
+}
+  
+
   render() {
-  jquery("canvas").remove()
-    
+    jquery("canvas").remove()
     return (
-     
-      <div className = "temp">
-         <input type="color" name="favcolor" value="#ff0000"/>
-         <input id="name-input"  onChange= {this.updateText}  placeholder= "text" />
-         <div className ="temp2">  <ThreeD text = {this.state.text} bool = {this.state.bool} /> 
-         </div>
-     
+
+      <div className="temp">
+        <input type="color" name="favcolor" onChange={this.updateColor} />
+        <input id="name-input" onChange={this.updateText} placeholder="text" />
+        <button onClick ={this.change}>update</button>
+        {/* {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null } */}
+
+        <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div>
+
       </div>
 
     )
@@ -71,9 +99,9 @@ export default App;
   //           // geometry.translate(xMid, 0, 0); // make shape ( N.B. edge view not visible ) 
   //           // text = new THREE.Mesh(geometry, matLite); text.position.z = - 150; scene.add(text);
   //           // // make line shape ( N.B. edge view remains visible )
-           
 
-          
+
+
   //           var textGeometry = new THREE.TextGeometry( "hoooooood", {
   //             font: font,
   //             size: 60,
@@ -83,15 +111,15 @@ export default App;
   //             bevelSize: 1,
   //             bevelEnabled: true
   //           });
-          
+
   //           var textMaterial = new THREE.MeshPhongMaterial( 
   //             { color: 0xdddddd,}
   //           );
-          
+
   //           var mesh = new THREE.Mesh( textGeometry, textMaterial );
-          
+
   //           scene.add( mesh );
-        
+
   //         }); //end load ffunction
   //     renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(window.innerWidth, window.innerHeight
   //     ); document.body.appendChild(renderer.domElement); let controls = new OrbitControls(camera, renderer.domElement); controls.target.set(0, 0, 0); controls.update(); window.addEventListener('resize', onWindowResize, false);
