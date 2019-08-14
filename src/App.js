@@ -17,7 +17,7 @@ class App extends Component {
       text: "hello",
       bool: false,
       color: "#00ff00"
-      
+
     }
   }
 
@@ -66,7 +66,7 @@ change = () =>
 
       <div className="temp">
         <input type="color" name="favcolor" onChange={this.updateColor} />
-        <input id="name-input" onChange={this.updateText} placeholder="text" />
+        <input id="name-input" type = "text" onChange={this.updateText} placeholder="text" />
         <button onClick ={this.change}>update</button>
         {/* {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null } */}
 

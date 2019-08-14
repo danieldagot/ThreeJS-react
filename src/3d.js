@@ -63,7 +63,7 @@ class ThreeD extends Component {
       renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(window.innerWidth, window.innerHeight
       );
       document.body.appendChild(renderer.domElement);
-      let controls = new OrbitControls(camera);
+      let controls = new OrbitControls(camera,renderer.domElement);
 
      
       camera.position.set(0, 0, 600)
