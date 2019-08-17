@@ -3,16 +3,16 @@ import React, { Component } from "react";
 // import * as THREE from "three";
 import ThreeD from "./3d";
 import jquery from "jquery"
-
+import Three from "./Three"
 // const OrbitControls = require('three-orbitcontrols')
 // let SVGLoader = require('three-svg-loader')
 
 class App extends Component {
   constructor() {
-   
+
     super()
     this.temp = ""
-    this.color =  ""
+    this.color = ""
     this.state = {
       text: "hello",
       bool: false,
@@ -32,8 +32,8 @@ class App extends Component {
     //   console.log(this.state.text)
 
     // })
-this.temp = event.target.value
-
+    this.temp = event.target.value
+    console.log(this.temp)
   }
 
   updateColor = (event) => {
@@ -45,33 +45,35 @@ this.temp = event.target.value
 
     // })
 
-this.color= event.target.value
-console.log(this.color);
+    this.color = event.target.value
+    console.log(this.color);
   }
-change = () =>
-{
-  this.setState({
-      color: this.color,
-      text:this.temp
-    }, function () {
-      console.log(this.state.color)
+  change = () => {
 
+    this.setState({
+      color: this.color,
+      text: this.temp
+    }, function () {
+      console.log(this.state.text)
+      
     })
-}
-  
+
+  }
+
 
   render() {
-    jquery("canvas").remove()
+    
+ jquery("canvas").remove()
+  
     return (
 
       <div className="temp">
         <input type="color" name="favcolor" onChange={this.updateColor} />
-        <input id="name-input" type = "text" onChange={this.updateText} placeholder="text" />
-        <button onClick ={this.change}>update</button>
-        {/* {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null } */}
-
-        <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div>
-
+        <textarea  id="name-input" cols="40" rows="1"  onChange={this.updateText} placeholder="text" />
+        <button onClick={this.change}>update</button>
+        {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null }
+         <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div>
+        {/* <Three text={this.state.text}  /> */}
       </div>
 
     )

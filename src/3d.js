@@ -16,9 +16,13 @@ class ThreeD extends Component {
         THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
       camera.position.set(0, 0, 600); 
       scene = new THREE.Scene(); 
-      scene.background = new THREE.Color(0xf0f0f0);
+ //     scene.background = new THREE.Color(0xf0f0f0);
       let loader = new THREE.FontLoader();
-
+ let loder1 = new THREE.TextureLoader();
+         loder1.load('https://images.pexels.com/photos/1205301/pexels-photo-1205301.jpeg' , function(texture)
+                      {
+                       scene.background = texture;  
+                      });
       loader.load(
         'https://raw.githubusercontent.com/danieldagot/3dhod/master/Open%20Sans%20Hebrew%20Extra%20Bold_Italic.json', function (font) {
           // let xMid, text; let color = new THREE.Color(0x006699);
@@ -32,11 +36,11 @@ class ThreeD extends Component {
           // text = new THREE.Mesh(geometry, matLite); text.position.z = - 150; scene.add(text);
           // // make line shape ( N.B. edge view remains visible )
 
-
+        
 
           var textGeometry = new THREE.TextGeometry(text, {
             font: font,
-            size: 60,
+            size: 30,
             height: 10,
             curveSegments: 12,
             bevelThickness: 1,
@@ -58,7 +62,7 @@ class ThreeD extends Component {
           //#8080ff
           let mesh = new THREE.Mesh(textGeometry, textMaterial);
           mesh.position.x = centerOffset;
-
+          mesh.position.y = 0;
           scene.add(mesh);
 
         }); //end load ffunction
