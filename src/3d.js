@@ -6,7 +6,6 @@ const OrbitControls = require('three-orbitcontrols')
 
 class ThreeD extends Component {
 
-
   text(bool, text, color) {
     // === THREE.JS CODE START ===
 
@@ -15,7 +14,9 @@ class ThreeD extends Component {
     let camera, scene, renderer; init(); animate(); function init() {
       camera = new
         THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
-      camera.position.set(0, 0, 600); scene = new THREE.Scene(); scene.background = new THREE.Color(0xf0f0f0);
+      camera.position.set(0, 0, 600); 
+      scene = new THREE.Scene(); 
+      scene.background = new THREE.Color(0xf0f0f0);
       let loader = new THREE.FontLoader();
 
       loader.load(
@@ -43,7 +44,9 @@ class ThreeD extends Component {
             bevelEnabled: true,
 
           });
-
+          textGeometry.computeBoundingBox();
+          textGeometry.computeVertexNormals();
+          let centerOffset = - 0.5 * ( textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x );
           // let textMaterial =  new THREE.MeshPhongMaterial( {
           //   shading: THREE.FlatShading,
           //   transparent: true,
@@ -54,7 +57,7 @@ class ThreeD extends Component {
 
           //#8080ff
           let mesh = new THREE.Mesh(textGeometry, textMaterial);
-
+          mesh.position.x = centerOffset;
 
           scene.add(mesh);
 
@@ -64,7 +67,7 @@ class ThreeD extends Component {
       );
       document.body.appendChild(renderer.domElement);
       let controls = new OrbitControls(camera,renderer.domElement);
-
+      controls.enablePan = false
      
       camera.position.set(0, 0, 600)
       //controls.target.set(0, 0, 0);
