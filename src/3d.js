@@ -22,6 +22,8 @@ class ThreeD extends Component {
          loder1.load('https://images.pexels.com/photos/1205301/pexels-photo-1205301.jpeg' , function(texture)
                       {
                        scene.background = texture;  
+                       console.log(texture);
+                       
                       });
       loader.load(
         'https://raw.githubusercontent.com/danieldagot/3dhod/master/Open%20Sans%20Hebrew%20Extra%20Bold_Italic.json', function (font) {

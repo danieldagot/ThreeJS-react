@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-// import * as THREE from "three";
+import * as THREE from "three";
 import ThreeD from "./3d";
 import jquery from "jquery"
 import Three from "./Three"
@@ -9,19 +9,22 @@ import Three from "./Three"
 
 class App extends Component {
   constructor() {
-
+     
     super()
+    this.colorloder1 = new THREE.TextureLoader();
+    this.loader = new THREE.FontLoader()
     this.temp = ""
     this.color = ""
     this.state = {
       text: "hello",
       bool: false,
-      color: "#00ff00"
-
+      color: "#00ff00", 
+     fonts : {}  
     }
+    
   }
 
-
+  
 
 
   updateText = (event) => {
@@ -34,6 +37,7 @@ class App extends Component {
     // })
     this.temp = event.target.value
     console.log(this.temp)
+    this.colorloder1.load()
   }
 
   updateColor = (event) => {
@@ -60,7 +64,22 @@ class App extends Component {
 
   }
 
+async componentDidMount(){
+  this.loader.load(
+    'https://raw.githubusercontent.com/danieldagot/3dhod/master/Open%20Sans%20Hebrew%20Extra%20Bold_Italic.json', function (font) {
+      console.log(font);
+  })
+let f =  await this.loader.parse("./fonts/Tinos_Regular.json")
+this.loader.load(
+  f.data, function (font) {
+    console.log(font);
+})
+  console.error(f);
+ 
+console.log(f);
 
+
+}
   render() {
     
  jquery("canvas").remove()
