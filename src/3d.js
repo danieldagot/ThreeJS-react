@@ -226,7 +226,10 @@ class ThreeD extends Component {
 
           console.log(test);
           // test=  test.split('\n')
+          test =  reverseSent(test)
           test = replaceAll(test, "!!!!!!!!!!!!!!!!", "\n")
+          
+
           return test
         }
 
