@@ -6,10 +6,10 @@ import jquery from "jquery"
 import Three from "./Three"
 // const OrbitControls = require('three-orbitcontrols')
 // let SVGLoader = require('three-svg-loader')
-
+let f1 = require("./fonts/Tinos_Regular.json")
 class App extends Component {
   constructor() {
-     
+
     super()
     this.colorloder1 = new THREE.TextureLoader();
     this.loader = new THREE.FontLoader()
@@ -18,13 +18,13 @@ class App extends Component {
     this.state = {
       text: "hello",
       bool: false,
-      color: "#00ff00", 
-     fonts : {}  
+      color: "#00ff00",
+      font: "Amatic"
     }
-    
+
   }
 
-  
+
 
 
   updateText = (event) => {
@@ -33,7 +33,6 @@ class App extends Component {
     //   temp: event.target.value
     // }, function () {
     //   console.log(this.state.text)
-
     // })
     this.temp = event.target.value
     console.log(this.temp)
@@ -52,6 +51,21 @@ class App extends Component {
     this.color = event.target.value
     console.log(this.color);
   }
+
+
+
+  updateFont = (event) => {
+    // jquery.get(".temp").empty()
+    this.setState({
+      font: event.target.value
+    }, function () {
+      console.log(this.state.font)
+    })
+
+
+    console.log(this.color);
+  }
+
   change = () => {
 
     this.setState({
@@ -59,39 +73,33 @@ class App extends Component {
       text: this.temp
     }, function () {
       console.log(this.state.text)
-      
+
     })
 
   }
 
-async componentDidMount(){
-  this.loader.load(
-    'https://raw.githubusercontent.com/danieldagot/3dhod/master/Open%20Sans%20Hebrew%20Extra%20Bold_Italic.json', function (font) {
-      console.log(font);
-  })
-let f =  await this.loader.parse("./fonts/Tinos_Regular.json")
-this.loader.load(
-  f.data, function (font) {
-    console.log(font);
-})
-  console.error(f);
- 
-console.log(f);
-
-
-}
   render() {
-    
- jquery("canvas").remove()
-  
+
+    jquery("canvas").remove()
+
     return (
 
       <div className="temp">
+        <div class = "input">
         <input type="color" name="favcolor" onChange={this.updateColor} />
-        <textarea  id="name-input" cols="40" rows="1"  onChange={this.updateText} placeholder="text" />
+        <textarea id="name-input" cols="40" rows="1" onChange={this.updateText} placeholder="text" />
+
+        <select onChange = {this.updateFont} >
+          <option value="Tinos">Tinos</option>
+          <option value="Amatic">Saab</option>
+          <option selected value="David">David</option>
+          <option  value="Sans">Sans</option>
+        </select>
+
         <button onClick={this.change}>update</button>
-        {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null }
-         <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div>
+        </div>
+        {this.state.bool ? <div className="temp2">  <ThreeD text={this.state.text} bool="1" /></div> : null}
+        <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color} font={this.state.font} /></div>
         {/* <Three text={this.state.text}  /> */}
       </div>
 
