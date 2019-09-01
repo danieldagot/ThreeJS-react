@@ -21,7 +21,7 @@ class App extends Component {
     this.state = {
       
       text: `היי
-      שלאום דניאל` ,
+      בדיקה דניאל` ,
       bool: false,
       color: "#0080ff",
       font: "Amatic",
@@ -124,7 +124,7 @@ class App extends Component {
       <div className="temp">
         <div class="input">
           <input type="color" value="#0080ff" name="favcolor" onChange={this.updateColor} />
-          <div onClick={this.cliced} val='Extreme' className={this.state.mode ? 'Extreme2' : 'Extreme'}> Extreme </div>
+          <div onClick={this.cliced} val='Extreme' className={this.state.mode ? 'Extreme2' : 'Extreme'}> מצב דלת </div>
           {this.state.mode ? <div> <input type="text" placeholder={"שם משפחה"} onChange={this.updateFirst} />
             <input type="number" placeholder={"מספר"} onChange={this.updateDoorNum} /> </div>
             : <textarea id="name-input" cols="40" rows="1" onChange={this.updateText} placeholder="text" />}
