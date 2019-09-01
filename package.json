@@ -13,7 +13,8 @@
     "three-orbitcontrols": "^2.102.2",
     "three-svg-loader": "^0.2.4",
     "three.text": "^1.0.13",
-    "threex": "^1.0.0"
+    "threex": "^1.0.0",
+    "utf8": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

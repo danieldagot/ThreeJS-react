@@ -1,12 +1,15 @@
 
 import React, { Component } from "react";
 import * as THREE from "three";
+import "./App.css"
+
 import ThreeD from "./3d";
 import jquery from "jquery"
 import Three from "./Three"
 // const OrbitControls = require('three-orbitcontrols')
 // let SVGLoader = require('three-svg-loader')
 let f1 = require("./fonts/Tinos_Regular.json")
+
 class App extends Component {
   constructor() {
 
@@ -14,12 +17,15 @@ class App extends Component {
     this.colorloder1 = new THREE.TextureLoader();
     this.loader = new THREE.FontLoader()
     this.temp = ""
-    this.color = ""
+    this.color = "#0080ff"
     this.state = {
-      text: "hello",
+      
+      text: `היי
+      שלאום דניאל` ,
       bool: false,
-      color: "#00ff00",
-      font: "Amatic"
+      color: "#0080ff",
+      font: "Amatic",
+      mode: false
     }
 
   }
@@ -38,6 +44,18 @@ class App extends Component {
     console.log(this.temp)
     this.colorloder1.load()
   }
+
+  updateFirst = (event) => {
+    this.first = event.target.value
+    console.log(this.temp)
+    this.colorloder1.load()
+  }
+  updateDoorNum = (event) => {
+    this.DoorNum = event.target.value
+  }
+
+
+
 
   updateColor = (event) => {
     // jquery.get(".temp").empty()
@@ -65,16 +83,35 @@ class App extends Component {
 
     console.log(this.color);
   }
+  cliced = () => {
+    this.setState({ text: "" }, function () { })
+    this.setState({ mode: !this.state.mode }, function () { })
 
+  }
+
+  
   change = () => {
+    if (this.state.mode) {
+      let text = `${this.first}
+      ${this.DoorNum}`
+      this.setState({
+        color: this.color,
+        text: text
+      }, function () {
+        console.log(this.state.text)
 
-    this.setState({
-      color: this.color,
-      text: this.temp
-    }, function () {
-      console.log(this.state.text)
+      })
 
-    })
+    }
+    else {
+      this.setState({
+        color: this.color,
+        text: this.temp
+      }, function () {
+        console.log(this.state.text)
+
+      })
+    }
 
   }
 
@@ -85,21 +122,26 @@ class App extends Component {
     return (
 
       <div className="temp">
-        <div class = "input">
-        <input type="color" name="favcolor" onChange={this.updateColor} />
-        <textarea id="name-input" cols="40" rows="1" onChange={this.updateText} placeholder="text" />
+        <div class="input">
+          <input type="color" value="#0080ff" name="favcolor" onChange={this.updateColor} />
+          <div onClick={this.cliced} val='Extreme' className={this.state.mode ? 'Extreme2' : 'Extreme'}> Extreme </div>
+          {this.state.mode ? <div> <input type="text" placeholder={"שם משפחה"} onChange={this.updateFirst} />
+            <input type="number" placeholder={"מספר"} onChange={this.updateDoorNum} /> </div>
+            : <textarea id="name-input" cols="40" rows="1" onChange={this.updateText} placeholder="text" />}
 
-        <select onChange = {this.updateFont} >
-          <option value="Tinos">Tinos</option>
-          <option value="Amatic">Saab</option>
-          <option selected value="David">David</option>
-          <option  value="Sans">Sans</option>
-        </select>
 
-        <button onClick={this.change}>update</button>
+
+          <select onChange={this.updateFont} >
+            <option value="Tinos">Tinos</option>
+            <option selected value="Amatic">Amatic</option>
+            <option value="David">David</option>
+            <option value="Sans">Sans</option>
+          </select>
+
+          <button onClick={this.change}>update</button>
         </div>
         {this.state.bool ? <div className="temp2">  <ThreeD text={this.state.text} bool="1" /></div> : null}
-        <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color} font={this.state.font} /></div>
+        <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color} font={this.state.font} mode ={this.state.mode} /></div>
         {/* <Three text={this.state.text}  /> */}
       </div>
 

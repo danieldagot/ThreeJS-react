@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import * as THREE from "three";
-
+const utf8 = require('utf8');
 const OrbitControls = require('three-orbitcontrols')
 //let SVGLoader = require('three-svg-loader')
 let f1 = require("./fonts/Tinos_Regular.json")
 let f2 = require("./fonts/Amatic SC_Regular.json")
 let f3 = require("./fonts/David Libre_Regular.json")
 let f4 = require("./fonts/Open Sans Hebrew Extra Bold_Italic (1).json")
-const fonts   ={
-  Tinos :  new THREE.Font(f1),
-  Amatic  :  new THREE.Font(f2),
-  David :  new THREE.Font(f3),
-  Sans :  new THREE.Font(f4),
+const fonts = {
+  Tinos: new THREE.Font(f1),
+  Amatic: new THREE.Font(f2),
+  David: new THREE.Font(f3),
+  Sans: new THREE.Font(f4),
 }
 
 const font3 = new THREE.Font(f1);
@@ -26,9 +26,9 @@ class ThreeD extends Component {
     let camera, scene, renderer; init(); animate(); function init() {
       camera = new
         THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
-      camera.position.set(0, 0, 600);
+      //camera.position.set(0, 0, 600);
       scene = new THREE.Scene();
-   
+
       //     scene.background = new THREE.Color(0xf0f0f0);
       let loader = new THREE.FontLoader();
       let loder1 = new THREE.TextureLoader();
@@ -77,21 +77,30 @@ class ThreeD extends Component {
           let color2 = new THREE.Color(color);
           let textMaterial = new THREE.MeshBasicMaterial({ color: color2, transparent: false, opacity: 0.4 });
 
+
+
+
+
           //#8080ff
           let mesh = new THREE.Mesh(textGeometry, textMaterial);
           mesh.position.x = centerOffset;
           mesh.position.y = 0;
+          mesh.position.z = 0;
           scene.add(mesh);
 
         }); //end load ffunction
       renderer = new THREE.WebGLRenderer({ antialias: false });
       renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(window.innerWidth, window.innerHeight
       );
+
+      camera.position.set(0, 0, 600)
+      console.log(renderer.domElement);
+
       document.body.appendChild(renderer.domElement);
       let controls = new OrbitControls(camera, renderer.domElement);
       controls.enablePan = false
+      // controls.maxDistance = 1000
 
-      camera.position.set(0, 0, 600)
       //controls.target.set(0, 0, 0);
       controls.update();
       window.addEventListener('resize', onWindowResize, true);
@@ -119,23 +128,120 @@ class ThreeD extends Component {
   }
 
 
-  getLen = (inputtxt) => {
+  getLen = (inputtxt, mode) => {
 
+    function reverseIt(data) {
+
+      // This function reverses a textarea
+      // Copyright (C) 2002 Eliram Haklai
+      // www.eliram.com
+
+      let theLineChars = "\n\r";
+      let theStraightChars = "";
+
+      theStraightChars = "0123456789" + theStraightChars;
+      theStraightChars = "./:-" + theStraightChars;
+      theStraightChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" + theStraightChars;
+      let theString = data
+      let theReverse = "";
+      let theReverseArea = "";
+      let theStraightBuffer = "";
+      let theLength = theString.length;
+      for (let i = 0; i < theLength; i++) {
+        if (theLineChars.indexOf(theString.charAt(i)) >= 0) {
+          if (theStraightBuffer != "") {
+            theReverse = theStraightBuffer + theReverse;
+            theStraightBuffer = "";
+          }
+          theReverse = theReverse + theString.charAt(i);
+        } else {
+          if (theStraightChars.indexOf(theString.charAt(i)) >= 0) {
+            theStraightBuffer = theStraightBuffer + theString.charAt(i);
+          } else {
+            if (theStraightBuffer != "") {
+              theReverse = theStraightBuffer + theReverse;
+              theStraightBuffer = "";
+            }
+            theReverse = theString.charAt(i) + theReverse;
+          }
+        }
+        if (theString.charAt(i) == "\r") {
+          theReverseArea = theReverseArea + theReverse;
+          theReverse = "";
+        }
+      }
+      if (theStraightBuffer != "") {
+        theReverse = theStraightBuffer + theReverse;
+        theStraightBuffer = "";
+      }
+      theReverseArea = theReverseArea + theReverse;
+      console.log(theReverseArea);
+      return theReverseArea
+
+    }
+    function replaceAll(str, find, replace) {
+      return str.replace(new RegExp(find, 'g'), replace);
+    }
 
     function reverseString(str) {
       return str.split("").reverse().join("");
     }
+    function reverseSent(str) {
+
+      return (str.split(/\s/).reverse().join(" "));
+      // return str = arr.join(" ");
+    }
+
     if (inputtxt != undefined) {
 
 
-      var letters = /^[A-Za-z1-9]+$/;
+      var letters = /^[A-Za-z]+$/;
       if (inputtxt.match(letters)) {
         console.log(inputtxt);
         return inputtxt;
       }
       else {
 
-        return reverseString(inputtxt);
+
+        console.log(inputtxt.includes("\n") ? inputtxt = replaceAll(inputtxt, "\n", " !!!!!!!!!!!!!!!! ") : null);
+
+        if (inputtxt.includes("!!!!!!!!!!!!!!!!")) { inputtxt = reverseSent(inputtxt) }
+        let test = reverseIt(inputtxt)
+
+        if (!mode) {
+          test = replaceAll(test, "!!!!!!!!!!!!!!!!", "\n")
+          let lines = test.split('\n');
+          for (var i = 0; i < lines.length; i++) {
+            lines[i] = reverseSent(lines[i])
+            console.log(lines[i]);
+
+          }
+          lines = lines.join("!!!!!!!!!!!!!!!!")
+          lines = replaceAll(lines, "!!!!!!!!!!!!!!!!", "\n")
+          return lines;
+
+
+        }
+        else {
+
+          console.log(test);
+          // test=  test.split('\n')
+          test = replaceAll(test, "!!!!!!!!!!!!!!!!", "\n")
+          return test
+        }
+
+
+
+
+        //  test = reverseIt(test)
+
+
+
+        //  return reverseString(inputtxt);
+
+        //  return reverseIt(inputtxt)
+        //return inputtxt
+
       }
     }
 
@@ -145,7 +251,7 @@ class ThreeD extends Component {
 
     return (
       <div>
-        {this.text(this.props.bool, this.getLen(this.props.text), this.props.color, this.props.font)}
+        {this.text(this.props.bool, this.getLen(this.props.text, this.props.mode), this.props.color, this.props.font)}
       </div>
 
 
