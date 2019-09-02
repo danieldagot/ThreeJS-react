@@ -75,17 +75,19 @@ class ThreeD extends Component {
           //   opacity: 0.7,
           // } );
           let color2 = new THREE.Color(color);
+
           let textMaterial = new THREE.MeshBasicMaterial({ color: color2, transparent: false, opacity: 0.4 });
 
 
 
-
+          camera.position.set(1000, 0, 600)
 
           //#8080ff
           let mesh = new THREE.Mesh(textGeometry, textMaterial);
           mesh.position.x = centerOffset;
-          mesh.position.y = 0;
+          mesh.position.y = 200;
           mesh.position.z = 0;
+          //camera.position.y = -150
           scene.add(mesh);
 
         }); //end load ffunction
@@ -93,7 +95,7 @@ class ThreeD extends Component {
       renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(window.innerWidth, window.innerHeight
       );
 
-      camera.position.set(0, 0, 600)
+      camera.position.set(0, 120, 600)
       console.log(renderer.domElement);
 
       document.body.appendChild(renderer.domElement);
@@ -226,9 +228,9 @@ class ThreeD extends Component {
 
           console.log(test);
           // test=  test.split('\n')
-          test =  reverseSent(test)
+          test = reverseSent(test)
           test = replaceAll(test, "!!!!!!!!!!!!!!!!", "\n")
-          
+
 
           return test
         }
