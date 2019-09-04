@@ -118,6 +118,8 @@ class App extends Component {
   render() {
 
     jquery("canvas").remove()
+    console.log(jquery("canvas"));
+    
 
     return (
 
@@ -142,7 +144,7 @@ class App extends Component {
         </div>
         {this.state.bool ? <div className="temp2">  <ThreeD text={this.state.text} bool="1" /></div> : null}
         <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color} font={this.state.font} mode ={this.state.mode} /></div>
-        {/* <Three text={this.state.text}  /> */}
+        {/* <Three text={this.state.text}  /> */ console.log(jquery("can"))}
       </div>
 
     )
