@@ -56,7 +56,7 @@ class ThreeD extends Component {
           console.log(fontName);
 
 
-          var textGeometry = new THREE.TextGeometry(text, {
+          var textGeometry = new THREE.TextBufferGeometry(text, {
             font: fonts[fontName],
             size: 30,
             height: 10,
@@ -80,12 +80,12 @@ class ThreeD extends Component {
 
 
 
-          camera.position.set(1000, 0, 600)
+        
 
           //#8080ff
           let mesh = new THREE.Mesh(textGeometry, textMaterial);
           mesh.position.x = centerOffset;
-          mesh.position.y = 200;
+          mesh.position.y = 0;
           mesh.position.z = 0;
           //camera.position.y = -150
           scene.add(mesh);
@@ -95,7 +95,7 @@ class ThreeD extends Component {
       renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(window.innerWidth, window.innerHeight
       );
 
-      camera.position.set(0, 120, 600)
+      camera.position.set(0, 0, 400)
       console.log(renderer.domElement);
 
       document.body.appendChild(renderer.domElement);
