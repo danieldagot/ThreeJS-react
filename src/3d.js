@@ -211,15 +211,59 @@ class ThreeD extends Component {
         let test = reverseIt(inputtxt)
 
         if (!mode) {
+          let max = 0
           test = replaceAll(test, "!!!!!!!!!!!!!!!!", "\n")
           let lines = test.split('\n');
-          for (var i = 0; i < lines.length; i++) {
+          for (let i = 0; i < lines.length; i++) {
+            lines[i].length >= max ? max = lines[i].length : max = max
             lines[i] = reverseSent(lines[i])
             console.log(lines[i]);
 
           }
+          console.log(max);
+
+
+
+          for (let i = 0; i < lines.length; i++) {
+            console.log(lines[i]);
+            for (let j = 0; i < (max - lines[i]); i++) {
+
+              console.log(lines[i] + 1);
+
+            }
+            lines[i] = "1".repeat(max - lines[i].length) + lines[i]
+
+          }
+
+          max = 0
+          for (let i = 0; i < lines.length; i++) {
+            lines[i].length >= max ? max = lines[i].length : max = max
+
+            console.log(lines[i].length);
+
+          }
+
+
+          console.log(max);
+
+
+
+          for (let i = 0; i < lines.length; i++) {
+            console.log(lines[i]);
+            for (let j = 0; i < (max - lines[i]); i++) {
+
+              console.log(lines[i] + 1);
+
+            }
+            lines[i] = "1".repeat(i) + "1".repeat(max - lines[i].length) + lines[i]
+
+          }
+
+          //lines[0] =  "3" +  lines[0] 
+
           lines = lines.join("!!!!!!!!!!!!!!!!")
           lines = replaceAll(lines, "!!!!!!!!!!!!!!!!", "\n")
+          lines = replaceAll(lines, " ", "2")
           return lines;
 
 
