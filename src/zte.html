@@ -1,81 +1,12 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Text reverse for Hebrew</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
 </head>
-
 <body>
-	<h2>Text Reverese for Hebrew</h2>
-	<b>By Eliram Haklai</b> - <a href=http://www.eliram.com>www.eliram.com </a> <p>
-		Write in the Input box, move the cursor to the Reverse box to see the result.<br>
-		Use CTRL + RIGHT-SHIFT to align text to the right.<p>
-			<form name=form1>
-				Input:<br>
-				<textarea name=Input rows=10 cols=80 onchange="reverseIt()"></textarea>
-				<p>
-					Reverse:<br>
-					<textarea name=Output rows=10 cols=80></textarea>
-					<p>
-						<input type=checkbox name=Numbers checked onClick="reverseIt()"> Do not reverse Numbers!<br>
-						<input type=checkbox name=Dashes checked onClick="reverseIt()"> Do not reverse Dots, Slashes,
-						Colons & Dashes ("./:-")!<br>
-						<input type=checkbox name=English checked onClick="reverseIt()"> Do not reverse English letters!
-			</form>
-			<p>
-				This Page was tested with Microsoft Internet Explorer 6<p>
-					<p>Versions of this & similar pages: <a href="flipheb3.html">flipheb3.html</a> (Fixed newline issue)
-						<a href="UTF2heb2.html">UTF2heb2.html</a> (UTF Conversion)<br /><a
-							href="flipheb2.html">flipheb2.html</a> (old) <a href="flipheb.html">flipheb.html</a> (Older)
-					</p>
+	<iframe src = "http://localhost:3000/text?test=	×××	××××§× ×× ×××	nv eurv	&font=David&color=00000" scrolling ="no"  width="100%" height= "150vw" ></iframe>
 </body>
-
 </html>
-<script language=javascript>
-	function reverseIt() {
-
-		// This function reverses a textarea
-		// Copyright (C) 2002 Eliram Haklai
-		// www.eliram.com
-
-		theLineChars = "\n\r";
-		theStraightChars = "";
-
-		theStraightChars = "0123456789" + theStraightChars;
-		theStraightChars = "./:-" + theStraightChars;
-		theStraightChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" + theStraightChars;
-		theString = this.form1.Input.value;
-		theReverse = "";
-		theReverseArea = "";
-		theStraightBuffer = "";
-		theLength = theString.length;
-		for (i = 0; i < theLength; i++) {
-			if (theLineChars.indexOf(theString.charAt(i)) >= 0) {
-				if (theStraightBuffer != "") {
-					theReverse = theStraightBuffer + theReverse;
-					theStraightBuffer = "";
-				}
-				theReverse = theReverse + theString.charAt(i);
-			} else {
-				if (theStraightChars.indexOf(theString.charAt(i)) >= 0) {
-					theStraightBuffer = theStraightBuffer + theString.charAt(i);
-				} else {
-					if (theStraightBuffer != "") {
-						theReverse = theStraightBuffer + theReverse;
-						theStraightBuffer = "";
-					}
-					theReverse = theString.charAt(i) + theReverse;
-				}
-			}
-			if (theString.charAt(i) == "\r") {
-				theReverseArea = theReverseArea + theReverse;
-				theReverse = "";
-			}
-		}
-		if (theStraightBuffer != "") {
-			theReverse = theStraightBuffer + theReverse;
-			theStraightBuffer = "";
-		}
-		theReverseArea = theReverseArea + theReverse;
-          theReverseArea;
-	}
-</script>
