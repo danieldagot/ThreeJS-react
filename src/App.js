@@ -12,22 +12,28 @@ const utf8 = require('utf8');
 
 class App extends Component {
   constructor() {
-     
+
     super()
     this.colorloder1 = new THREE.TextureLoader();
     this.loader = new THREE.FontLoader()
     this.temp = ""
-    this.color = ""
+    this.color = "#0080ff"
     this.state = {
-      text: "hello",
+
+      text: `
+      היי
+      בדיקה דניאל
+      nv eurv
+      ` ,
       bool: false,
-      color: "#00ff00", 
-     fonts : {}  
+      color: "#0080ff",
+      font: "David",
+      mode: false
     }
-    
+
   }
 
-  
+
 
 
   updateText = (event) => {
@@ -36,12 +42,23 @@ class App extends Component {
     //   temp: event.target.value
     // }, function () {
     //   console.log(this.state.text)
-
     // })
     this.temp = event.target.value
     console.log(this.temp)
     this.colorloder1.load()
   }
+
+  updateFirst = (event) => {
+    this.first = event.target.value
+    console.log(this.temp)
+    this.colorloder1.load()
+  }
+  updateDoorNum = (event) => {
+    this.DoorNum = event.target.value
+  }
+
+
+
 
   updateColor = (event) => {
     // jquery.get(".temp").empty()
@@ -55,56 +72,98 @@ class App extends Component {
     this.color = event.target.value
     console.log(this.color);
   }
-  change = () => {
 
+
+
+  updateFont = (event) => {
+    // jquery.get(".temp").empty()
     this.setState({
-      color: this.color,
-      text: this.temp
+      font: event.target.value
     }, function () {
-      console.log(this.state.text)
-      
+      console.log(this.state.font)
+    })
+
+
+    console.log(this.color);
+  }
+  cliced = () => {
+    this.setState({ text: "" }, function () { })
+    this.setState({ mode: !this.state.mode }, function () { })
+
+  }
+
+
+  muse = () => {
+    this.setState({ bool: !this.state.bool }, function () {
+      console.log(this.state.bool);
+      console.log(jquery("canvas"));
+
     })
 
   }
 
-async componentDidMount(){
-  this.loader.load(
-    'https://raw.githubusercontent.com/danieldagot/3dhod/master/Open%20Sans%20Hebrew%20Extra%20Bold_Italic.json', function (font) {
-      console.log(font);
-  })
-let f =  await this.loader.parse("./fonts/Tinos_Regular.json")
-this.loader.load(
-  f.data, function (font) {
-    console.log(font);
-})
-  console.error(f);
- 
-console.log(f);
+  change = () => {
+    if (this.state.mode) {
+      let text = `${this.first}
+      ${this.DoorNum}`
+      this.setState({
+        color: this.color,
+        text: text
+      }, function () {
+        console.log(this.state.text)
 
+      })
 
-}
+    }
+    else {
+      this.setState({
+        color: this.color,
+        text: this.temp
+      }, function () {
+        console.log(this.state.text)
+
+      })
+    }
+
+  }
+
   render() {
+
+    jquery("canvas").remove()
+    console.log( );
     
- jquery("canvas").remove()
-  
+
     return (
 
       <div className="temp">
-        <input type="color" name="favcolor" onChange={this.updateColor} />
-        <textarea  id="name-input" cols="40" rows="1"  onChange={this.updateText} placeholder="text" />
-        <button onClick={this.change}>update</button>
-        {/* {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null }
-         <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div> */}
-        {/* <Three text={this.state.text}  /> */}
-        <Iframe url={`"https://dagot1.herokuapp.com/text?test=${utf8.encode(this.state.text)}&font=${this.state.font}&color=${this.color.replace("#","")}` 
-        }
+
+        <div class="input">
+          <input type="color" value={ this.color} name="favcolor" onChange={this.updateColor} />
+          {this.state.mode ? <div> <input type="text" placeholder={"שם משפחה"} onChange={this.updateFirst} />
+            <input type="number" placeholder={"מספר"} onChange={this.updateDoorNum} /> </div>
+            : <textarea id="name-input" cols="40" rows="1" onChange={this.updateText} placeholder="text" />}
+          <select onChange={this.updateFont} >
+            <option value="Tinos">Tinos</option>
+            <option selected value="Amatic">Amatic</option>
+            <option value="David">David</option>
+            <option value="Sans">Sans</option>
+          </select>
+          <button onClick={this.change}>update</button>
+        </div>
+
+        <Iframe url={`https://dagot1.herokuapp.com/text?test=${utf8.encode(this.state.text)}&font=${this.state.font}&color=${this.state.color.replace('#',"")}`}
           width="100%"
-          height="450px"
+         height={window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight * 0.9 }
           id="myId"
           className="myClassname"
           display="initial"
-          position="relative" />
+          position="relative"
+          scrolling = "no" />
+
       </div>
+
+
+
 
     )
   }
