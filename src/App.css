@@ -33,3 +33,27 @@
     transform: rotate(360deg);
   }
 }
+
+
+.input{
+display: flex ; 
+flex-direction: row ; 
+justify-content: center;
+justify-items: center ; 
+align-items: center ; 
+}
+.input div{
+  padding: 4px;
+}
+.input .Extreme{
+  border-radius: 7% 20%;
+  transition: 0.3s;
+  background-position: center;
+ 
+}
+.Extreme2{
+  border-radius: 7% 20%;
+  transition: 0.3s;
+  background-position: center; 
+  background-color: green;
+}
