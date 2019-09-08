@@ -1,11 +1,14 @@
 
 import React, { Component } from "react";
 import * as THREE from "three";
+import Iframe from 'react-iframe'
 import ThreeD from "./3d";
 import jquery from "jquery"
 import Three from "./Three"
 // const OrbitControls = require('three-orbitcontrols')
 // let SVGLoader = require('three-svg-loader')
+const utf8 = require('utf8');
+
 
 class App extends Component {
   constructor() {
@@ -90,9 +93,17 @@ console.log(f);
         <input type="color" name="favcolor" onChange={this.updateColor} />
         <textarea  id="name-input" cols="40" rows="1"  onChange={this.updateText} placeholder="text" />
         <button onClick={this.change}>update</button>
-        {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null }
-         <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div>
+        {/* {this.state.bool  ? <div className ="temp2">  <ThreeD text = {this.state.text} bool = "1" /></div> : null }
+         <div className="temp2">  <ThreeD text={this.state.text} bool="1" color={this.state.color}   /></div> */}
         {/* <Three text={this.state.text}  /> */}
+        <Iframe url={`"https://dagot1.herokuapp.com/text?test=${utf8.encode(this.state.text)}&font=${this.state.font}&color=${this.color.replace("#","")}` 
+        }
+          width="100%"
+          height="450px"
+          id="myId"
+          className="myClassname"
+          display="initial"
+          position="relative" />
       </div>
 
     )
