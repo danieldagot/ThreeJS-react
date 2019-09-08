@@ -163,14 +163,14 @@ console.log(`/search?test=${utf8.encode(this.state.text)}&font=${this.state.font
         </Router>
         {/* <div className="temp2" onClick ={this.muse} >  <ThreeD text={this.state.text}  color={this.state.color} font={this.state.font} mode ={this.state.mode} bool = {this.state.bool} /></div> */}
 
-        {/* <Iframe url={`/text?test=${utf8.encode(this.state.text)}&font=${this.state.font}&color=${this.color.replace("#","")}` 
+        <Iframe url={`/text?test=${utf8.encode(this.state.text)}&font=${this.state.font}&color=${this.color.replace("#","")}` 
         }
           width="100%"
           height="450px"
           id="myId"
           className="myClassname"
           display="initial"
-          position="relative" /> */}
+          position="relative" />
       </div>
 
 
