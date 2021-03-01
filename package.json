@@ -9,7 +9,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "resize-observer-polyfill": "^1.5.1",
-    "three": "^0.107.0",
+    "three": "^0.125.0",
     "three-orbitcontrols": "^2.102.2",
     "three-svg-loader": "^0.2.4",
     "three.text": "^1.0.13",
